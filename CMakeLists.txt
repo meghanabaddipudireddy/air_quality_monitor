@@ -45,11 +45,21 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    Core/Src/scd40.c
+    Core/Src/pms5003.c
+    Core/Src/w25q32.c
+    Core/Src/eink.c
+    Core/Src/queues.c
+    Core/Src/sensor_task.c
+    Core/Src/pipeline_task.c
+    Core/Src/flash_task.c
+    Core/Src/ble_task.c
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+    Core/Inc
 )
 
 # Add project symbols (macros)

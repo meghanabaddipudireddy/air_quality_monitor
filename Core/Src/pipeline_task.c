@@ -14,7 +14,10 @@ static uint16_t calculate_aqi(uint16_t pm25) {
     } else if (pm25 > 250) {
         return (uint16_t)(((float)(500-301)/(pm25 - 250)) * (pm25 - 250) + 301);
     }
+
+    return 0;
 }
+
 
 
 void pipeline_task(void *argument) {
