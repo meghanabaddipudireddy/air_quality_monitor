@@ -22,7 +22,14 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "scd40.h"
+#include "pms5003.h"
+#include "w25q32.h"
+#include "queues.h"
+#include "sensor_task.h"
+#include "pipeline_task.h"
+#include "flash_task.h"
+#include "ble_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -111,7 +118,18 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+  scd40_init(&hi2c1);
+  pms5003_init(&huart3);
+  w25q32_init(&hspi1);
 
+  xSensorQueue = xQueueCreate(4, sizeof(sensor_readings_t));
+  xFlashQueue  = xQueueCreate(4, sizeof(log_record_t));
+  xBLEQueue    = xQueueCreate(4, sizeof(log_record_t));
+
+  xTaskCreate(sensor_task, "sensor", 512, NULL, 4, NULL);
+  xTaskCreate(pipeline_task, "pipeline", 512,NULL, 3, NULL);
+  xTaskCreate(flash_task, "flash", 384, NULL, 2, NULL);
+  xTaskCreate(ble_task, "ble", 512, NULL, 1, NULL);
   /* USER CODE END 2 */
 
   /* Init scheduler */
