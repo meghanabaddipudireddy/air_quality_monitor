@@ -15,6 +15,10 @@ e-ink display — Chosen over LCD or OLED because it consumes power only during 
 
 LiPo + TP4056 + AMS1117 — The LiPo cell stores energy at 3.7V. The TP4056 safely charges it from USB-C using CC/CV algorithm. The AMS1117 LDO regulates the cell's swinging 3.0-4.2V output to a stable 3.3V rail for all components.
 
+## Schematic
+[View Schematic PDF](air_quality_monitor_schematic.pdf)
+
+
 # System Architecture
 
 The firmware is organized into four layers. Each layer only communicates with the layer directly above or below it.
